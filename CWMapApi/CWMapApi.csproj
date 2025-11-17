@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{5E97F6B1-3A37-400B-841F-5C98A38FE4DD}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>CWMapApi</RootNamespace>
+        <AssemblyName>CWMapApi</AssemblyName>
+        <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="0Harmony">
+          <HintPath>lib\0Harmony.dll</HintPath>
+        </Reference>
+        <Reference Include="Assembly-CSharp">
+          <HintPath>lib\Assembly-CSharp.dll</HintPath>
+        </Reference>
+        <Reference Include="BepInEx">
+          <HintPath>lib\BepInEx.dll</HintPath>
+        </Reference>
+        <Reference Include="LocalizationAssembly">
+          <HintPath>lib\LocalizationAssembly.dll</HintPath>
+        </Reference>
+        <Reference Include="PhotonRealtime">
+          <HintPath>lib\PhotonRealtime.dll</HintPath>
+        </Reference>
+        <Reference Include="PhotonUnityNetworking">
+          <HintPath>lib\PhotonUnityNetworking.dll</HintPath>
+        </Reference>
+        <Reference Include="Sirenix.Serialization">
+          <HintPath>lib\Sirenix.Serialization.dll</HintPath>
+        </Reference>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+        <Reference Include="System.Data"/>
+        <Reference Include="System.Xml"/>
+        <Reference Include="Unity.AI.Navigation">
+          <HintPath>lib\Unity.AI.Navigation.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine">
+          <HintPath>lib\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AIModule">
+          <HintPath>lib\UnityEngine.AIModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.AssetBundleModule">
+          <HintPath>lib\UnityEngine.AssetBundleModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.CoreModule">
+          <HintPath>lib\UnityEngine.CoreModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputLegacyModule">
+          <HintPath>lib\UnityEngine.InputLegacyModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.InputModule">
+          <HintPath>lib\UnityEngine.InputModule.dll</HintPath>
+        </Reference>
+        <Reference Include="Zorro.Core.Runtime">
+          <HintPath>lib\Zorro.Core.Runtime.dll</HintPath>
+        </Reference>
+        <Reference Include="Zorro.UI.Runtime">
+          <HintPath>lib\Zorro.UI.Runtime.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="src\Api\CustomMap.cs" />
+        <Compile Include="src\CWMapApiManager.cs" />
+        <Compile Include="src\CustomMapInitializer.cs" />
+        <Compile Include="src\MapStates.cs" />
+        <Compile Include="src\Patches\Bot_Nav_NavmeshPatch.cs" />
+        <Compile Include="src\Patches\Common.cs" />
+        <Compile Include="src\Patches\DiveBellParentPatch.cs" />
+        <Compile Include="src\Patches\DivingBellPatch.cs" />
+        <Compile Include="src\Patches\LevelPatch.cs" />
+        <Compile Include="src\Patches\MainMenuHandlerPatch.cs" />
+        <Compile Include="src\Patches\PatrolPointPatch.cs" />
+        <Compile Include="src\MapApi.cs" />
+        <Compile Include="src\Patches\RoomStatsHolderPatch.cs" />
+        <Compile Include="src\PluginTools.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include=".env" />
+      <Content Include="PostBuild.sh" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="include\" />
+      <Folder Include="lib\" />
+    </ItemGroup>
+    <Target Name="PostBuildScript" AfterTargets="Build">
+        <Exec Command="$(ProjectDir)PostBuild.sh $(ProjectDir) $(OutDir)"/>
+    </Target>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>

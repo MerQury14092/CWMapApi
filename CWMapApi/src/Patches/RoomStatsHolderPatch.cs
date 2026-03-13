@@ -19,8 +19,7 @@ namespace CWMapApi.Patches
         {
             if (MapApi.EnableRandomMapPatch)
             {
-                __instance.LevelToPlay = 3;
-                // __instance.LevelToPlay = new Random().Next(0, 3 + MapApi.CustomMaps.Count);
+                __instance.LevelToPlay = new Random().Next(0, 3 + MapApi.CustomMaps.Count);
             }
         }
     }

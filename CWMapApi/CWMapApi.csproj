@@ -106,6 +106,7 @@
     <ItemGroup>
       <Content Include=".env" />
       <Content Include="PostBuild.sh" />
+      <Content Include="README.md" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="include\" />

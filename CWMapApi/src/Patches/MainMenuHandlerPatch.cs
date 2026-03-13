@@ -20,6 +20,8 @@ namespace CWMapApi.Patches
 
         private static IEnumerator MapApiInit(Scene scene)
         {
+            if (MapApi.ModInitialized)
+                yield break;
             MapApi.log.LogInfo("Loading mod");
             var canvas = PluginTools.FindObjectInScene(scene, "Canvas");
             var mainPage = PluginTools.FindChildInParent(canvas, "MainPage");
